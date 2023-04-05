@@ -14,6 +14,10 @@ jobs:
       id-token: 'write'
     runs-on: ubuntu-latest
     steps:
+    - name: checkout repo
+      uses: actions/checkout@v2.3.4
+    - name: show resume.tex file content
+      run: cat test/test.json
     - id: 'auth'
       name: 'Authenticate to Google Cloud'
       uses: 'google-github-actions/auth@v1'
