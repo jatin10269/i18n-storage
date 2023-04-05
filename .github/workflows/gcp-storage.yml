@@ -9,11 +9,10 @@ env:
 
 jobs:
   upload_file:
-   runs-on: ubuntu-latest
     permissions:
       contents: 'read'
       id-token: 'write'
-
+    runs-on: ubuntu-latest
     steps:
     - id: 'auth'
       name: 'Authenticate to Google Cloud'
