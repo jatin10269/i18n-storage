@@ -25,7 +25,7 @@ jobs:
     - id: 'upload-file'
       uses: 'google-github-actions/upload-cloud-storage@v1'
       with:
-        path: '../../test/test.json'
+        path: '../../../../../i18n-storage/test/test.json'
         destination: '${{env.BUCKET_NAME}}/test'
 
     # Example of using the output
