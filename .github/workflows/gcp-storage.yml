@@ -2,7 +2,7 @@ name: edit-gcs-bucket
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
 env:
   BUCKET_NAME: jetblue-dotcom-i18n
