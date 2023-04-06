@@ -44,7 +44,7 @@ jobs:
       uses: 'google-github-actions/upload-cloud-storage@v1'
       with:
         path: '${{ steps.changed-files-excluded.outputs.all_changed_files }}'
-        destination: '${{env.BUCKET_NAME}}/${{ steps.changed-files-excluded.outputs.all_changed_files }}'
+        destination: '${{env.BUCKET_NAME}}/test3'
 
     # Example of using the output
     # - id: 'uploaded-files'
