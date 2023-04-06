@@ -18,6 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Test changed-files
     steps:
+      - name: checkout repo
+        uses: actions/checkout@v3
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0  # OR "2" -> To retrieve the preceding commit.
