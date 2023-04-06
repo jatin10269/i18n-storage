@@ -15,9 +15,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: checkout repo
-      uses: actions/checkout@v2.3.4
-    - name: show resume.tex file content
-      run: cat test/test.json
+      uses: actions/checkout@v3
+      with:
+          fetch-depth: 0
+    - name: Get all changed *.json file(s) or any file in the static folder excluding the docs folder
+      id: changed-files-excluded
+      uses: tj-actions/changed-files@v35
+      with:
+          files: |
+            **/*.json
+            static
+          files_ignore: workflows
+
+    - name: Run step if any *.js file(s) or any file in the static folder change
+      if: steps.changed-files-excluded.outputs.any_changed == 'true'
+      run: |
+          echo "One or more *.js file(s) or any file in the static folder but not in the doc folder has changed."
+          echo "List all the files that have changed: ${{ steps.changed-files-excluded.outputs.all_changed_files }}"
     - id: 'auth'
       name: 'Authenticate to Google Cloud'
       uses: 'google-github-actions/auth@v1'
@@ -29,8 +43,8 @@ jobs:
     - id: 'upload-file'
       uses: 'google-github-actions/upload-cloud-storage@v1'
       with:
-        path: './test1'
-        destination: '${{env.BUCKET_NAME}}/test'
+        path: '${{ steps.changed-files-excluded.outputs.all_changed_files }}'
+        destination: '${{env.BUCKET_NAME}}/${{ steps.changed-files-excluded.outputs.all_changed_files }}'
 
     # Example of using the output
     # - id: 'uploaded-files'
