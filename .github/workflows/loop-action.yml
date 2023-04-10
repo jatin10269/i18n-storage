@@ -11,13 +11,6 @@ jobs:
   get-files:
     runs-on: ubuntu-latest
     name: Test changed-files
-    strategy:
-      matrix:
-        package:
-          - coding-standard
-          - phpstan-rules
-    outputs:
-      matrix: ${{ steps.changed-files.outputs.all_changed_files }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -31,14 +24,13 @@ jobs:
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "$file was changed"
           done
+    outputs:
+      matrix: ${{ steps.changed-files.outputs.all_changed_files }}
   build:
     needs: [ get-files ]
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        package:
-          - coding-standard
-          - phpstan-rules
         value: ${{needs.get-files.outputs.matrix}}
     steps:
       - run: |
