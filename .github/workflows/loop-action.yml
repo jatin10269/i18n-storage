@@ -39,7 +39,7 @@ jobs:
         package:
           - coding-standard
           - phpstan-rules
-        value: ${{fromJson(needs.get-files.outputs.matrix)}}
+        value: ${{needs.get-files.outputs.matrix}}
     steps:
       - run: |
           echo "${{ matrix.value }}"
