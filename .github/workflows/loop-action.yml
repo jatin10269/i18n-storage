@@ -25,6 +25,7 @@ jobs:
             echo "$file was changed"
           done
           echo "${{ steps.changed-files.outputs.all_changed_files }}"
+          echo "::set-output name=matrix-browser:: $(echo [\"${{ steps.changed-files.outputs.all_changed_files }}\"] |sed 's/ /\", \"/g')"
     outputs:
       matrix: ${{ steps.changed-files.outputs.all_changed_files }}
   build:
