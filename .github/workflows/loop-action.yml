@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        value: ['abc','def']
+        value: ${{needs.get-files.outputs.matrix}}
     steps:
       - run: |
           echo "${{ matrix.value }}"
