@@ -25,7 +25,8 @@ jobs:
             echo "$file was changed"
           done
           echo "${{ steps.changed-files.outputs.all_changed_files }}"
-          echo "::set-output name=matrix-browser:: $(echo [\"${{steps.changed-files.outputs.all_changed_files}}\"] |sed 's/ /\", \"/g')"
+          testbro="${{ steps.changed-files.outputs.all_changed_files }}"
+          echo "::set-output name=matrix-browser::[\"${testBro//', '/\",\"}\"]"
           echo "{matrix-files}={$(echo [\"${{steps.changed-files.outputs.all_changed_files}}\"] |sed 's/ /\", \"/g')}" >> $GITHUB_ENV
           echo "${{ env.matrix-files }}"
     outputs:
@@ -35,7 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        value: ${{needs.get-files.outputs.matrix}}
+        value: ${{needs.get-files.outputs.matrix-browser}}
     steps:
       - run: |
           echo "${{ matrix.value }}"
