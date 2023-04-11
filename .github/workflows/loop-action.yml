@@ -26,7 +26,7 @@ jobs:
           done
           echo "${{ steps.changed-files.outputs.all_changed_files }}"
           testbro="${{ steps.changed-files.outputs.all_changed_files }}"
-          echo "::set-output name=matrix-browser::[${{testBro}}]"
+          echo "::set-output name=matrix-browser::[testBro]"
           echo "{matrix-files}={$(echo [\"${{steps.changed-files.outputs.all_changed_files}}\"] |sed 's/ /\", \"/g')}" >> $GITHUB_ENV
           echo "${{ env.matrix-files }}"
     outputs:
