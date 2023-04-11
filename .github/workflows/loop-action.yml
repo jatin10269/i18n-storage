@@ -25,7 +25,8 @@ jobs:
             echo "$file was changed"
           done
           echo "${{ steps.changed-files.outputs.all_changed_files }}"
-          echo "{matrix-files}={[\"${".github/workflows/loop-action.yml" | tr " " "\n"}\"]}" >> $GITHUB_ENV
+          echo "::set-output name=matrix-browser:: $(echo [\"${{steps.changed-files.outputs.all_changed_files}}\"] |sed 's/ /\", \"/g')"
+          
           echo "${{ env.matrix-files }}"
     outputs:
       matrix: ${{ steps.changed-files.outputs.all_changed_files }}
