@@ -25,12 +25,13 @@ jobs:
           echo "${{ steps.changed-files.outputs.all_changed_files }}"
     outputs:
       matrix: ${{ steps.changed-files.outputs.all_changed_files }}
+      val: ${{steps.changed-files.outputs.matrix-browser}}
   build:
     needs: [ get-files ]
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        value: ["${{needs.get-files.outputs.matrix}}|sed 's/ /\",\"/g'","abc","def"]
+        value: ["${{needs.get-files.outputs.matrix}}","${{needs.get-files.outputs.val}}","abc","def"]
     steps:
       - run: |
           echo "${{ matrix.value }}"
