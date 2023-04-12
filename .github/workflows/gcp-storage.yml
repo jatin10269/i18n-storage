@@ -56,9 +56,11 @@ jobs:
         #workload_identity_provider: 'projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
         #service_account: 'my-service-account@my-project.iam.gserviceaccount.com'
     - run: |
-          echo "${{ matrix.value }}"
+        echo "file_path=$(echo "${{ matrix.value }}" |sed 's%/[^/]*$%%')" >> $GITHUB_ENV
+    - run: |
+        echo "${{ env.file_path }}"
     - id: 'upload-file'
       uses: 'google-github-actions/upload-cloud-storage@v1'
       with:
         path: '${{ matrix.value }}'
-        destination: '${{env.BUCKET_NAME}}/test3'
+        destination: '${{env.BUCKET_NAME}}/${{ env.file_path }}'
