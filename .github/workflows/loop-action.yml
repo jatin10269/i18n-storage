@@ -43,4 +43,4 @@ jobs:
     steps:
       - run: |
           echo "${{ matrix.value }}"
-          echo "${{ env.action_state }}"
+          echo "${{needs.get-files.outputs.matrix}}"
