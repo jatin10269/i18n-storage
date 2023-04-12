@@ -26,10 +26,6 @@ jobs:
         id: step_one
         run: |
           echo "action_state=$(echo "${{ steps.changed-files.outputs.all_changed_files }}" |sed 's/^/["/;s/$/"]/;s/ /\",\"/g')" >> $GITHUB_ENV
-      - name: Use the value
-        id: step_two
-        run: |
-          echo ${{ env.action_state }}
     outputs:
       matrix: ${{ env.action_state }}
   build:
