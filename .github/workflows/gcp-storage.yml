@@ -46,6 +46,8 @@ jobs:
       matrix:
         value: "${{fromJson(needs.get-files.outputs.matrix)}}"
     steps:
+    - name: checkout repo
+      uses: actions/checkout@v3
     - id: 'auth'
       name: 'Authenticate to Google Cloud'
       uses: 'google-github-actions/auth@v1'
