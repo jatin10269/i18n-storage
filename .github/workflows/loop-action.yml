@@ -24,6 +24,14 @@ jobs:
           echo "${{ steps.changed-files.outputs.all_changed_files }}"
           echo "action_state=yellow" >> $GITHUB_ENV
           echo "${{ env.action_state }}"
+      - name: Set the value
+        id: step_one
+        run: |
+          echo "action_state=yellow" >> $GITHUB_ENV
+      - name: Use the value
+        id: step_two
+        run: |
+          echo "${{ env.action_state }}" # This will output 'yellow'
     outputs:
       matrix: ${{ steps.changed-files.outputs.all_changed_files }}
   build:
