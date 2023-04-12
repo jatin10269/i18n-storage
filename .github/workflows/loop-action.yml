@@ -32,7 +32,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        value: ["${{needs.get-files.outputs.all_changed_files}}"]
+        value: ["${{needs.get-files.outputs.all_changed_files}}","abc","def"]
     steps:
       - run: |
+          echo "${{needs.get-files.outputs.all_changed_files}}"
           echo "${{ matrix.value }}"
