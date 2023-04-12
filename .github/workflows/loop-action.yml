@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        value: ["${{needs.get-files.outputs.matrix}}","abc","def"]
+        value: ["${{needs.get-files.outputs.matrix}}|sed 's/ /\",\"/g'","abc","def"]
     steps:
       - run: |
           echo "${{ matrix.value }}"
