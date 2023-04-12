@@ -22,7 +22,7 @@ jobs:
       - name: List all changed files
         run: |
           testBro = "aaa bbb"
-          echo "::set-output name=matrix-browser:: $(echo [\"$testBro\"] |sed 's/ /\",\"/g')"
+          echo "::set-output name=matrix-browser:: $(echo [\"${{ steps.changed-files.outputs.all_changed_files }}\"] |sed 's/ /\",\"/g')"
           echo "${{ steps.changed-files.outputs.all_changed_files }}"
     outputs:
       matrix: ${{ steps.changed-files.outputs.all_changed_files }}
