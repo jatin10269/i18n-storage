@@ -25,8 +25,8 @@ jobs:
             echo "$file was changed"
           done
           echo "${{ steps.changed-files.outputs.all_changed_files }}"
-          testbro="${{ steps.changed-files.outputs.all_changed_files }}"
-          echo ${{testBro}}
+          testbro=${{ steps.changed-files.outputs.all_changed_files }}
+          echo "${{testBro}}"
           echo "::set-output name=matrix-browser::['ttBro']"
           echo "{matrix-files}={'testBro'}" >> $GITHUB_ENV
           echo "${{ env.matrix-files }}"
