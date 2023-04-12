@@ -23,6 +23,8 @@ jobs:
         run: |
           echo "::set-output name=matrix-browser:: $(echo [\"${{ steps.changed-files.outputs.all_changed_files }}\"] |sed 's/ /\",\"/g')"
           echo "${{ steps.changed-files.outputs.all_changed_files }}"
+          echo "action_state=yellow" >> $GITHUB_ENV
+          echo "${{ env.action_state }}"
     outputs:
       matrix: ${{ steps.changed-files.outputs.all_changed_files }}
       val: ${{steps.changed-files.outputs.matrix-browser}}
@@ -35,3 +37,4 @@ jobs:
     steps:
       - run: |
           echo "${{ matrix.value }}"
+          echo "${{ env.action_state }}"
