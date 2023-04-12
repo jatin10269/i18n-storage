@@ -35,5 +35,4 @@ jobs:
         value: ["${{needs.get-files.outputs.matrix}}","abc","def"]
     steps:
       - run: |
-          echo "${{needs.get-files.outputs.matrix}}"
           echo "${{ matrix.value }}"
