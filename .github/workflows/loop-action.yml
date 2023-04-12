@@ -26,13 +26,12 @@ jobs:
           echo "${{ env.action_state }}"
     outputs:
       matrix: ${{ steps.changed-files.outputs.all_changed_files }}
-      val: ${{steps.changed-files.outputs.matrix-browser}}
   build:
     needs: [ get-files ]
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        value: ["${{needs.get-files.outputs.matrix}}","${{needs.get-files.outputs.val}}","abc","def"]
+        value: ["${{needs.get-files.outputs.matrix}}","abc","def"]
     steps:
       - run: |
           echo "${{ matrix.value }}"
