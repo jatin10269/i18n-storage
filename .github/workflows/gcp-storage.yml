@@ -37,7 +37,7 @@ jobs:
     outputs:
       matrix: ${{ env.action_state }}
   upload_file:
-    if: ${{needs.get-files.outputs.matrix}} != ''
+    if: ${{needs.get-files.outputs.matrix}} != []
     needs: [ get-files ]
     permissions:
       contents: 'read'
