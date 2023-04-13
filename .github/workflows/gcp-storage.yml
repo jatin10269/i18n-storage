@@ -38,6 +38,7 @@ jobs:
       matrix: ${{ env.action_state }}
   upload_file:
     needs: [ get-files ]
+    if: fromJson(needs.get-files.outputs.matrix)[0] != null
     permissions:
       contents: 'read'
       id-token: 'write'
@@ -60,7 +61,6 @@ jobs:
     - run: |
         echo "${{ env.file_path }}"
     - id: 'upload-file'
-      if: ${{ matrix.value }} !== ''
       uses: 'google-github-actions/upload-cloud-storage@v1'
       with:
         path: '${{ matrix.value }}'
